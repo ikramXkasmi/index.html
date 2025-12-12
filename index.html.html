@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIE OFPPT | Questionnaire</title>
+    
+    <style>
+
+        :root {
+          
+            --color-primary-orange: #428eb1a1; 
+            --color-secondary-dark: #394867; 
+            --color-background-card: #97acd4b9;
+            --bg-color-1-light-blue: #D7F7F7; 
+            --bg-color-2-aqua: #81D4FA;      
+            --bg-color-3-green-grey: #AECB8F;
+            --bg-color-4-violet: #300add27;  
+            --border-radius-large: 20px;
+            --border-radius-small: 10px;
+        }
+
+        body {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+          
+            background-color: var(--bg-color-1-light-blue);
+            background-image: 
+             
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ctext x='0' y='20' font-size='18' font-weight='bold' fill='%23C3B1E190' transform='rotate(-25)'%3EPIE%3C/text%3E%3Ctext x='40' y='60' font-size='18' font-weight='bold' fill='%23AECB8F80' transform='rotate(15)'%3EPIE%3C/text%3E%3C/svg%3E"),
+               
+                linear-gradient(45deg, var(--bg-color-2-aqua) 0%, transparent 30%),
+                linear-gradient(-45deg, var(--bg-color-3-green-grey) 0%, transparent 30%),
+                radial-gradient(circle at top right, var(--bg-color-4-violet) 0%, transparent 25%);
+            background-size: 200px, 100%, 100%, 100%;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 450px;
+            margin: 20px auto;
+            background: var(--color-background-card);
+            border-radius: var(--border-radius-large);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            box-sizing: border-box;
+            transition: all 0.5s ease-in-out;
+        }
+        
+       
+        .page:not(.active) {
+            display: none;
+        }
+
+        .header-logo {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-secondary-dark);
+            background-color: #F0F0F0;
+            padding: 10px;
+            border-radius: var(--border-radius-small);
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--color-secondary-dark);
+            font-size: 0.9em;
+        }
+
+        .input-group input[type="text"], 
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        
+    
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            border-radius: var(--border-radius-large);
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit {
+            background-color: var(--color-primary-orange);
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #F0F0F0;
+            color: var(--color-secondary-dark);
+            border: 1px solid #ccc;
+        }
+        
+        .explanation-box {
+            border: 2px solid var(--color-primary-orange);
+            border-radius: var(--border-radius-small);
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+            background-color: #FFF3E0; 
+        }
+        
+        .explanation-box h3 {
+            color: var(--color-secondary-dark);
+            margin-top: 0;
+            border-bottom: 2px solid var(--color-primary-orange);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .problem-selector {
+            margin-bottom: 25px;
+        }
+
+        .problem-selector h4 {
+            color: var(--color-secondary-dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        
+        .radio-option:hover {
+            background-color: #F9F9F9;
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 10px;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--color-secondary-dark);
+            border-radius: 50%;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border: 5px solid var(--color-primary-orange);
+            background-color: var(--color-primary-orange);
+        }
+
+        .other-problem-box {
+            border: 2px dashed var(--color-secondary-dark);
+            border-radius: var(--border-radius-small);
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .other-problem-box h4 {
+            margin-top: 0;
+            text-align: left;
+            color: var(--color-primary-orange);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="questionnaire-page" class="page active">
+        <div class="header-logo">
+            <img src="" alt="">
+        </div>
+
+        <form>
+            <div class="input-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" placeholder="Entrez votre nom ici" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" placeholder="Entrez votre prénom ici" required>
+            </div>
+
+            <div class="explanation-box">
+                <h3>Explication du Questionnaire</h3>
+                <p>
+                    Le questionnaire vise à identifier les problèmes que nous rencontrons 
+                    dans l'établissement, afin d'améliorer notre cadre scolaire.
+                </p>
+            </div>
+
+            <a href="#problemes-page" class="btn btn-submit" onclick="showPage('problemes-page')">
+                Envoyer/ Aller à Problèmes
+            </a>
+            <button type="reset" class="btn btn-cancel">
+                Annuler
+            </button>
+        </form>
+    </div>
+
+    <div id="problemes-page" class="page">
+        <div class="header-logo">LOGO PIE</div>
+        
+        <div class="problem-selector">
+            <h4>Sélectionnez le problème</h4>
+
+            <div class="radio-option">
+                <input type="radio" id="probleme1" name="probleme" value="hygiene">
+                <label for="probleme1">Problème d'hygiène</label>
+            </div>
+            
+            <div class="radio-option">
+                <input type="radio" id="probleme2" name="probleme" value="materiel">
+                <label for="probleme2">Problème de matériel</label>
+            </div>
+            
+            <div class="radio-option">
+                <input type="radio" id="probleme3" name="probleme" value="cafeteria">
+                <label for="probleme3">Problème de Cafétéria (Exemple)</label>
+            </div>
+            
+            <div class="radio-option">
+                <input type="radio" id="probleme4" name="probleme" value="structure">
+                <label for="probleme4">Problème de structure</label>
+            </div>
+
+            <div class="radio-option">
+                <input type="radio" id="probleme-autre" name="probleme" value="autre" checked>
+                <label for="probleme-autre">Autres problèmes</label>
+            </div>
+        </div>
+
+        <div class="other-problem-box">
+            <h4>Autres problèmes et ses explications</h4>
+            <div class="input-group">
+                <label for="autre-probleme-titre">Titre du problème :</label>
+                <input type="text" id="autre-probleme-titre" placeholder="Titre du problème">
+            </div>
+            <div class="input-group">
+                <label for="autre-probleme-explication">Explication (Détails) :</label>
+                <textarea id="autre-probleme-explication" rows="4" placeholder="plus de details..."></textarea>
+            </div>
+        </div>
+
+        <a href="#confirmation" class="btn btn-submit">
+            Envoyer
+        </a>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+        
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+        
+            document.getElementById(pageId).classList.add('active');
+        }
+        
+        const hash = window.location.hash.substring(1);
+        if (hash === 'problemes-page') {
+            showPage('problemes-page');
+        } else {
+             showPage('questionnaire-page');
+        }
+    </script>
+</body>
+</html>>
